@@ -18,7 +18,7 @@ Cloud Ready: Fully configured for deployment on Streamlit Community Cloud.
 
 🛠️ Tech Stack
 Language: Python 3.11 / 3.12
-
+Live at : https://zenbot-n3zn7mtcbmspncmndxuu3t.streamlit.app/
 Framework: LangChain (Core, Community, Groq)
 
 LLM: Groq (openai/gpt-oss-20b)
