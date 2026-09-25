@@ -11,7 +11,7 @@ from langchain_core.tools import tool
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from create_vectorstore import INDEX, MODEL
+from create_vectorstore import INDEX, MODEL, main as build_index
 
 load_dotenv()
 OPERATIONS = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul, ast.Div: operator.truediv, ast.FloorDiv: operator.floordiv, ast.Mod: operator.mod, ast.Pow: operator.pow}
@@ -52,8 +52,8 @@ def calculator(expression: str) -> str:
 def build_agent():
     if not os.getenv("GROQ_API_KEY"):
         raise RuntimeError("Set GROQ_API_KEY in .env or Streamlit Cloud secrets.")
-    if not (INDEX / "index.faiss").exists():
-        raise RuntimeError("Knowledge index missing. Run: python create_vectorstore.py")
+        if not (INDEX / "index.faiss").exists():
+        build_index()
     embeddings = HuggingFaceEmbeddings(model_name=MODEL)
     # Load only the index built locally from your own trusted data.
     store = FAISS.load_local(str(INDEX), embeddings, allow_dangerous_deserialization=True)
